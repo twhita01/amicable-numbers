@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Amicable Number Tester</title>
+<link rel="stylesheet" type="text/css" href="numbers.css">
+</head>
+
+<body>
+	<h1> Amicable Number Tester</h1>
+	
+	<form>
+	Number 1: <input type="text" id="a1"> <br>
+	Number 2: <input type="text" id="a2"> <br> <br>
+	</form>
+	
+	<button id="run"> Are they amicable?</button> <br> <br>
+	
+<!--	<div class="inline"> Your Numbers: </div>
+	<div class="inline; numbers" id="displayNums"> - - </div> <br>
+	<div class="inline"> Does it factor: </div>
+	<div class="inline; numbers" id="doesFactor"> - - </div> <br>
+	<div class="inline"> Factors:</div>
+	<div class="inline; numbers" id="factors"> - - </div> <br>
+	<div class="inline"> Sum:</div>
+	<div class="inline; numbers" id="sum"> - - </div>
+-->
+	<div id="result"></div>
+
+	<script language="javascript">
+	
+	document.getElementById("run").onclick = function() {begin()};
+	
+	function begin(){
+		initialize();
+	}
+	
+	function initialize(){
+		var num1 = document.getElementById("a1").value;
+		num1 = parseInt(num1);
+		var num2 = document.getElementById("a2").value;
+		num2 = parseInt(num2);
+		
+//		document.getElementById("displayNums").innerHTML = "";
+//		document.getElementById("displayNums").innerHTML += num1 + "&nbsp";
+//		document.getElementById("displayNums").innerHTML += num2;
+	
+		var factors1 = getFactors(num1);
+		var sum1 = addFactors(factors1);
+	
+		var factors2 = getFactors(num2);
+		var sum2 = addFactors(factors2);
+		
+		if( sum1==num2 && sum2==num1){
+			document.getElementById("result").innerHTML = "They are amicable!"
+		} else {
+			document.getElementById("result").innerHTML = "They are not amicable!"
+		}
+		
+	}
+		
+	function isFactor(number, check){
+		if( (number%check == 0)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+	function showFactors(arr){
+		document.getElementById("factors").innerHTML = "";	
+		for( var i = 0; i<arr.length; i++){
+			document.getElementById("factors").innerHTML += arr[i] + " ";	
+		}
+	}
+		
+	function addFactors(arr){
+		var sum = 0
+		for( var i =0; i<arr.length; i++){
+			sum = sum + arr[i];
+		}
+//		document.getElementById("sum").innerHTML += sum + "";
+		return sum;
+	}
+		
+	function getFactors(big){
+		fax = new Array();
+		counter = 0;
+		for(var i =1; i<big; i++){
+			if(isFactor(big, i) == true){
+				fax[counter] = i;
+				counter++;
+			} else {
+				continue;
+			}
+		}
+		return fax;
+	}
+
+	</script>
+</body>
+</html>
